@@ -17,6 +17,7 @@ def get_memory_usage():
 
 def get_disk_usage(path='/'):
     disk = psutil.disk_usage(path)
+    
     return {
         "total": disk.total,
         "used": disk.used,
