@@ -17,7 +17,7 @@ def get_memory_usage():
 
 def get_disk_usage(path='/'):
     disk = psutil.disk_usage(path)
-    
+
     return {
         "total": disk.total,
         "used": disk.used,
@@ -37,7 +37,6 @@ def get_system_info():
     system = platform.system()
     node = platform.node()
     release = platform.release()
-    uname =  platform.mac_ver()
     version = platform.version()
     machine = platform.machine()
     processor = platform.processor()
@@ -47,7 +46,6 @@ def get_system_info():
         "node_name": node,
         "release": release,
         "version": version,
-        "uname":uname,
         "machine": machine,
         "processor": processor,
     }
@@ -56,6 +54,14 @@ def get_system_info():
 async def server_info():
     system_info = get_system_info()
     return system_info
+
+@app.get("/node")
+async def server_info():
+    return  platform.node()
+
+@app.get("/")
+async def server_info():
+    return "OK"
 
 @app.get("/monitor")
 async def monitoring():
